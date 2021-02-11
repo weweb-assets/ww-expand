@@ -2,7 +2,7 @@
     <div class="ww-expand">
         <div class="toggle-container" @click="toggleContent">
             <div class="unactive-toggle" v-if="!isVisible || content.editLayout">
-                <div class="label unactive" v-if="content.editLayout">Close</div>
+                <div class="label unactive" v-if="content.editLayout">Closed</div>
                 <wwLayout
                     class="layout toggle-layout"
                     :class="{ isEditing: isEditing }"
@@ -11,7 +11,7 @@
             </div>
 
             <div class="active-toggle" v-if="isVisible || content.editLayout">
-                <div class="label active" v-if="content.editLayout">Open</div>
+                <div class="label active" v-if="content.editLayout">Opened</div>
                 <wwLayout class="layout toggle-layout" :class="{ isEditing: isEditing }" path="toggleLayout"></wwLayout>
             </div>
         </div>
