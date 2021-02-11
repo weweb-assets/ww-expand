@@ -66,6 +66,7 @@ export default {
     },
     methods: {
         toggleContent() {
+            if (this.isEditing) return;
             this.isVisible = !this.isVisible;
         },
         /* wwEditor:start */
