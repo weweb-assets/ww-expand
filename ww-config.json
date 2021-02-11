@@ -1,14 +1,20 @@
 {
     "componentPath": "./src/wwObject.vue",
-    "options": {
-        "autoByContent": true
-    },
     "editor": {
         "label": {
-            "en": "My element"
+            "en": "Expand layout"
         },
         "menuOptions": {},
         "styleOptions": {},
-        "settingsOptions": {}
+        "settingsOptions": {
+            "toggleEdit": {
+                "type": "Button",
+                "options": {
+                    "text": { "en": "Toggle edition", "fr": "Toggle edition" },
+                    "color": "blue",
+                    "action": "toggleEdit"
+                }
+            }
+        }
     }
 }

@@ -1,18 +1,17 @@
 {
-    "name": "ww-button",
+    "name": "ww-expand",
     "repository": {
         "type": "git",
-        "url": "https://github.com/weweb-assets/vue-starter"
+        "url": "https://github.com/weweb-assets/ww-expand"
     },
     "version": "0.0.1",
     "license": "MIT",
     "scripts": {
         "build": "weweb build",
-        "serve": "weweb serve",
-        "create-config": "weweb config"
+        "serve": "weweb serve"
     },
     "dependencies": {
-        "vue": "^2.6.11"
+        "vue": "^2.6.12"
     },
     "devDependencies": {
         "@vue/eslint-config-prettier": "^6.0.0",
