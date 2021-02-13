@@ -2,7 +2,7 @@
     <div class="ww-expand">
         <div class="toggle-container" @click="toggleContent">
             <div class="unactive-toggle" v-if="!isVisible || content.editLayout">
-                <div class="label unactive" v-if="content.editLayout">Closed</div>
+                <div class="label unactive label-xs normal" v-if="content.editLayout">closed</div>
                 <wwLayout
                     class="layout toggle-layout"
                     :class="{ isEditing: isEditing }"
@@ -11,13 +11,13 @@
             </div>
 
             <div class="active-toggle" v-if="isVisible || content.editLayout">
-                <div class="label active" v-if="content.editLayout">Opened</div>
+                <div class="label active label-xs normal" v-if="content.editLayout">opened</div>
                 <wwLayout class="layout toggle-layout" :class="{ isEditing: isEditing }" path="toggleLayout"></wwLayout>
             </div>
         </div>
         <wwExpandTransition transitionFunction="ease">
             <div class="content" v-show="isVisible || isEditing">
-                <div class="label content" v-if="content.editLayout">Content</div>
+                <div class="label content label-xs normal" v-if="content.editLayout">content</div>
                 <wwLayout
                     class="layout content-layout"
                     :class="{ isEditing: isEditing }"
@@ -106,19 +106,19 @@ export default {
             top: 0;
             right: 0;
 
-            padding: 0 2px;
-
-            font-size: 0.7em;
+            padding: var(--ww-spacing-00) var(--ww-spacing-01);
+            border-bottom-left-radius: var(--ww-spacing-00);
+            z-index: 101;
             color: white;
 
             &.unactive {
-                background-color: var(--ww-color-dark-400);
+                background-color: var(--ww-color-dark-500);
             }
             &.active {
-                background-color: var(--ww-color-green-400);
+                background-color: var(--ww-color-green-500);
             }
             &.content {
-                background-color: var(--ww-color-blue-400);
+                background-color: var(--ww-color-blue-500);
             }
         }
     }
