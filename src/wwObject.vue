@@ -71,15 +71,15 @@ export default {
         },
         /* wwEditor:start */
         toggleEdit() {
-            this.$emit('update', { editLayout: !this.editLayout });
+            this.editLayout = !this.editLayout;
         },
         /* wwEditor:end */
     },
     mounted() {
-        if (this.editLayout) this.$emit('update', { editLayout: false });
+        this.editLayout = false;
     },
     beforeDestroy() {
-        if (this.editLayout) this.$emit('update', { editLayout: false });
+        this.editLayout = false;
     },
 };
 </script>
