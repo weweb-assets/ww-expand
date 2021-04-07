@@ -52,7 +52,7 @@ export default {
     },
     watch: {
         isEditing() {
-            if (!this.isEditing) if (this.content.editLayout) this.$emit('update', { editLayout: false });
+            if (!this.isEditing && this.content.editLayout) this.$emit('update', { editLayout: false });
         },
     },
     computed: {
