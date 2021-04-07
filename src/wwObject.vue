@@ -1,8 +1,8 @@
 <template>
     <div class="ww-expand">
         <div class="toggle-container" @click="toggleContent">
-            <div class="unactive-toggle" v-if="!isVisible || content.editLayout">
-                <div class="label unactive label-xs normal" v-if="content.editLayout">closed</div>
+            <div class="unactive-toggle" v-if="!isVisible || editLayout">
+                <div class="label unactive label-xs normal" v-if="editLayout">closed</div>
                 <wwLayout
                     class="layout toggle-layout"
                     :class="{ isEditing: isEditing }"
@@ -10,14 +10,14 @@
                 ></wwLayout>
             </div>
 
-            <div class="active-toggle" v-if="isVisible || content.editLayout">
-                <div class="label active label-xs normal" v-if="content.editLayout">opened</div>
+            <div class="active-toggle" v-if="isVisible || editLayout">
+                <div class="label active label-xs normal" v-if="editLayout">opened</div>
                 <wwLayout class="layout toggle-layout" :class="{ isEditing: isEditing }" path="toggleLayout"></wwLayout>
             </div>
         </div>
         <wwExpandTransition transitionFunction="ease">
             <div class="content" v-show="isVisible || isEditing">
-                <div class="label content label-xs normal" v-if="content.editLayout">content</div>
+                <div class="label content label-xs normal" v-if="editLayout">content</div>
                 <wwLayout
                     class="layout content-layout"
                     :class="{ isEditing: isEditing }"
@@ -43,16 +43,16 @@ export default {
         toggleLayout: [],
         activeToggleLayout: [],
         contentLayout: [],
-        editLayout: false,
     },
     data() {
         return {
             isVisible: false,
+            editLayout: false,
         };
     },
     watch: {
         isEditing() {
-            if (!this.isEditing && this.content.editLayout) this.$emit('update', { editLayout: false });
+            this.editLayout = false;
         },
     },
     computed: {
@@ -71,15 +71,15 @@ export default {
         },
         /* wwEditor:start */
         toggleEdit() {
-            this.$emit('update', { editLayout: !this.content.editLayout });
+            this.$emit('update', { editLayout: !this.editLayout });
         },
         /* wwEditor:end */
     },
     mounted() {
-        if (this.content.editLayout) this.$emit('update', { editLayout: false });
+        if (this.editLayout) this.$emit('update', { editLayout: false });
     },
     beforeDestroy() {
-        if (this.content.editLayout) this.$emit('update', { editLayout: false });
+        if (this.editLayout) this.$emit('update', { editLayout: false });
     },
 };
 </script>
