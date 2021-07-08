@@ -1,28 +1,20 @@
 <template>
     <div class="ww-expand">
         <div class="toggle-container" @click="toggleContent">
-            <div class="unactive-toggle" v-if="!isVisible || editLayout">
-                <div class="label unactive label-xs normal" v-if="editLayout">closed</div>
-                <wwLayout
-                    class="layout toggle-layout"
-                    :class="{ isEditing: isEditing }"
-                    path="activeToggleLayout"
-                ></wwLayout>
+            <div v-if="!isVisible || editLayout" class="unactive-toggle">
+                <div v-if="editLayout" class="label unactive label-xs normal">closed</div>
+                <wwLayout class="layout toggle-layout" :class="{ isEditing }" path="activeToggleLayout" />
             </div>
 
-            <div class="active-toggle" v-if="isVisible || editLayout">
-                <div class="label active label-xs normal" v-if="editLayout">opened</div>
-                <wwLayout class="layout toggle-layout" :class="{ isEditing: isEditing }" path="toggleLayout"></wwLayout>
+            <div v-if="isVisible || editLayout" class="active-toggle">
+                <div v-if="editLayout" class="label active label-xs normal">opened</div>
+                <wwLayout class="layout toggle-layout" :class="{ isEditing: isEditing }" path="toggleLayout" />
             </div>
         </div>
-        <wwExpandTransition transitionFunction="ease">
-            <div class="content" v-show="isVisible || isEditing">
-                <div class="label content label-xs normal" v-if="editLayout">content</div>
-                <wwLayout
-                    class="layout content-layout"
-                    :class="{ isEditing: isEditing }"
-                    path="contentLayout"
-                ></wwLayout>
+        <wwExpandTransition transition-function="ease">
+            <div v-show="isVisible || isEditing" class="content">
+                <div v-if="editLayout" class="label content label-xs normal">content</div>
+                <wwLayout class="layout content-layout" :class="{ isEditing: isEditing }" path="contentLayout" />
             </div>
         </wwExpandTransition>
     </div>
@@ -31,12 +23,11 @@
 <script>
 import wwExpandTransition from './wwExpandTransition.vue';
 export default {
-    name: '__COMPONENT_NAME__',
     components: { wwExpandTransition },
     props: {
-        content: Object,
+        content: { type: Object, required: true },
         /* wwEditor:start */
-        wwEditorState: Object,
+        wwEditorState: { type: Object, required: true },
         /* wwEditor:end */
     },
     wwDefaultContent: {
@@ -50,11 +41,6 @@ export default {
             editLayout: false,
         };
     },
-    watch: {
-        isEditing() {
-            this.editLayout = false;
-        },
-    },
     computed: {
         isEditing() {
             /* wwEditor:start */
@@ -63,6 +49,17 @@ export default {
             // eslint-disable-next-line no-unreachable
             return false;
         },
+    },
+    watch: {
+        isEditing() {
+            this.editLayout = false;
+        },
+    },
+    mounted() {
+        this.editLayout = false;
+    },
+    beforeUnmount() {
+        this.editLayout = false;
     },
     methods: {
         toggleContent() {
@@ -74,12 +71,6 @@ export default {
             this.editLayout = !this.editLayout;
         },
         /* wwEditor:end */
-    },
-    mounted() {
-        this.editLayout = false;
-    },
-    beforeDestroy() {
-        this.editLayout = false;
     },
 };
 </script>
