@@ -4,8 +4,6 @@
         "label": {
             "en": "Expand layout"
         },
-        "menuOptions": {},
-        "styleOptions": {},
         "settingsOptions": {
             "toggleEdit": {
                 "type": "Button",

@@ -5,16 +5,15 @@
                 <div v-if="editLayout" class="label unactive label-xs normal">closed</div>
                 <wwLayout class="layout toggle-layout" :class="{ isEditing }" path="activeToggleLayout" />
             </div>
-
             <div v-if="isVisible || editLayout" class="active-toggle">
                 <div v-if="editLayout" class="label active label-xs normal">opened</div>
-                <wwLayout class="layout toggle-layout" :class="{ isEditing: isEditing }" path="toggleLayout" />
+                <wwLayout class="layout toggle-layout" :class="{ isEditing }" path="toggleLayout" />
             </div>
         </div>
         <wwExpandTransition transition-function="ease">
             <div v-show="isVisible || isEditing" class="content">
                 <div v-if="editLayout" class="label content label-xs normal">content</div>
-                <wwLayout class="layout content-layout" :class="{ isEditing: isEditing }" path="contentLayout" />
+                <wwLayout class="layout content-layout" :class="{ isEditing }" path="contentLayout" />
             </div>
         </wwExpandTransition>
     </div>
@@ -22,6 +21,7 @@
 
 <script>
 import wwExpandTransition from './wwExpandTransition.vue';
+
 export default {
     components: { wwExpandTransition },
     props: {
