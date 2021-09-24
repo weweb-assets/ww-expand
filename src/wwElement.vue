@@ -30,11 +30,6 @@ export default {
         wwEditorState: { type: Object, required: true },
         /* wwEditor:end */
     },
-    wwDefaultContent: {
-        toggleLayout: [],
-        activeToggleLayout: [],
-        contentLayout: [],
-    },
     data() {
         return {
             isVisible: false,
