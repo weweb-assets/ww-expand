@@ -1,6 +1,6 @@
 <template>
     <div class="ww-expand">
-        <div class="toggle-container" @click="toggleContent">
+        <div class="toggle-container" @click="toggle">
             <div v-if="!isVisible || editLayout" class="unactive-toggle">
                 <div v-if="editLayout" class="label unactive label-xs normal">closed</div>
                 <wwLayout class="layout toggle-layout" :class="{ isEditing }" path="activeToggleLayout" />
@@ -57,9 +57,15 @@ export default {
         this.editLayout = false;
     },
     methods: {
-        toggleContent() {
+        toggle() {
             if (this.isEditing) return;
             this.isVisible = !this.isVisible;
+        },
+        open() {
+            this.isVisible = true;
+        },
+        close() {
+            this.isVisible = false;
         },
         /* wwEditor:start */
         toggleEdit() {

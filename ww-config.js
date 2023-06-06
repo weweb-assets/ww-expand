@@ -4,6 +4,11 @@ export default {
             en: 'Expand layout',
         },
     },
+    actions: [
+        { label: 'Toggle', action: 'toggle' },
+        { label: 'Open', action: 'open' },
+        { label: 'Close', action: 'close' },
+    ],
     properties: {
         toggleEdit: {
             type: 'Button',
