@@ -1,24 +1,24 @@
 export default {
     editor: {
         label: {
-            en: 'Expand layout',
+            en: 'Accordion',
+            fr: 'Accordion',
         },
     },
-    actions: [
-        { label: 'Toggle', action: 'toggle' },
-        { label: 'Open', action: 'open' },
-        { label: 'Close', action: 'close' },
-    ],
     properties: {
-        toggleEdit: {
-            type: 'Button',
-            section: 'settings',
-            editorOnly: true,
-            options: {
-                text: { en: 'Toggle edition', fr: 'Toggle edition' },
-                color: 'blue',
-                action: 'toggleEdit',
+        value: {
+            label: {
+                en: 'Init value',
             },
+            type: 'OnOff',
+            section: 'settings',
+            bindable: true,
+            /* wwEditor:start */
+            bindingValidation: {
+                type: 'boolean',
+                tooltip: 'A boolean that defines the initial value: `true | false`',
+            },
+            /* wwEditor:end */
         },
         toggleLayout: {
             hidden: true,
@@ -31,6 +31,16 @@ export default {
         contentLayout: {
             hidden: true,
             defaultValue: [],
+        },
+        toggleEdit: {
+            type: 'Button',
+            section: 'settings',
+            editorOnly: true,
+            options: {
+                text: { en: 'Toggle edition', fr: 'Toggle edition' },
+                color: 'blue',
+                action: 'toggleEdit',
+            },
         },
     },
 };

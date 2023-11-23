@@ -1,40 +1,51 @@
 <template>
     <div class="ww-expand">
-        <div class="toggle-container" @click="toggle">
-            <div v-if="!isVisible || editLayout" class="unactive-toggle">
+        <div class="toggle-container" @click="handleManualInput($event)">
+            <div v-if="!value || editLayout" class="unactive-toggle">
                 <div v-if="editLayout" class="label unactive label-xs normal">closed</div>
-                <wwLayout class="layout toggle-layout" :class="{ isEditing }" path="activeToggleLayout" />
+                <wwLayout class="layout toggle-layout" path="activeToggleLayout" />
             </div>
-            <div v-if="isVisible || editLayout" class="active-toggle">
+            <div v-if="value || editLayout" class="active-toggle">
                 <div v-if="editLayout" class="label active label-xs normal">opened</div>
-                <wwLayout class="layout toggle-layout" :class="{ isEditing }" path="toggleLayout" />
+                <wwLayout class="layout toggle-layout" path="toggleLayout" />
             </div>
         </div>
-        <wwExpandTransition transition-function="ease">
-            <div v-show="isVisible || isEditing" class="content">
+        <wwExpandTransition>
+            <div v-show="value || isEditing" class="content">
                 <div v-if="editLayout" class="label content label-xs normal">content</div>
-                <wwLayout class="layout content-layout" :class="{ isEditing }" path="contentLayout" />
+                <wwLayout class="layout content-layout" path="contentLayout" />
             </div>
         </wwExpandTransition>
     </div>
 </template>
 
 <script>
-import wwExpandTransition from './wwExpandTransition.vue';
+import { computed } from "vue";
 
 export default {
-    components: { wwExpandTransition },
     props: {
         content: { type: Object, required: true },
+        uid: { type: String, required: true },
+        wwElementState: { type: Object, required: true },
         /* wwEditor:start */
         wwEditorState: { type: Object, required: true },
         /* wwEditor:end */
     },
     data() {
         return {
-            isVisible: false,
             editLayout: false,
         };
+    },
+    emits: ['update:content:effect', 'trigger-event', 'add-state', 'remove-state'],
+    setup(props) {
+        const { value: variableValue, setValue } = wwLib.wwVariable.useComponentVariable({
+            uid: props.uid,
+            name: 'value',
+            type: 'boolean',
+            defaultValue: computed(() => props.content.value === undefined ? false : props.content.value),
+        });
+
+        return { variableValue, setValue };
     },
     computed: {
         isEditing() {
@@ -44,8 +55,17 @@ export default {
             // eslint-disable-next-line no-unreachable
             return false;
         },
+        value() {
+            return !!this.variableValue;
+        },
     },
     watch: {
+        'content.value'(newValue) {
+            newValue = !!newValue;
+            if (newValue === this.value) return;
+            this.setValue(newValue);
+            this.$emit('trigger-event', { name: 'initValueChange', event: { value: newValue } });
+        },
         isEditing() {
             this.editLayout = false;
         },
@@ -57,27 +77,22 @@ export default {
         this.editLayout = false;
     },
     methods: {
-        toggle() {
+        handleManualInput($event) {
             if (this.isEditing) return;
-            this.isVisible = !this.isVisible;
+            const value = !this.value
+            this.setValue(value);
+            this.$emit('trigger-event', { name: 'change', event: { domEvent: $event, value } });
         },
-        open() {
-            this.isVisible = true;
-        },
-        close() {
-            this.isVisible = false;
-        },
-        /* wwEditor:start */
         toggleEdit() {
             this.editLayout = !this.editLayout;
         },
-        /* wwEditor:end */
     },
 };
 </script>
 
 <style lang="scss" scoped>
 .ww-expand {
+
     .active-toggle,
     .unactive-toggle,
     .content {
@@ -106,9 +121,11 @@ export default {
             &.unactive {
                 background-color: var(--ww-color-dark-500);
             }
+
             &.active {
                 background-color: var(--ww-color-green-500);
             }
+
             &.content {
                 background-color: var(--ww-color-blue-500);
             }
