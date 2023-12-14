@@ -4,6 +4,7 @@ export default {
             en: 'Accordion',
             fr: 'Accordion',
         },
+        icon: 'view-grid',
     },
     properties: {
         value: {
