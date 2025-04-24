@@ -23,4 +23,4 @@ Accordion-style component that hides/reveals content via expand/collapse state w
 ***Notes:***
 All 3 slots are required.
 Be careful : toggleLayout is for EXPANDED toggle container and activeToggleLayout is for CLOSED toggle container.
-The logic to expand and colapse on click is already managed in the code of the ww-expand element.
+***IMPORTANT***: The logic to expand and colapse on click is already managed in the code of the ww-expand element. Do not add click events or functions to manage it.
