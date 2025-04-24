@@ -18,11 +18,7 @@ Accordion-style component that hides/reveals content via expand/collapse state w
 - contentLayout: any[] - Components for content area
 
 ***Exposed Variables:***
-- value: boolean - Current expand state of the component
-
-***Events:***
-- change: Triggered when expand state changes via user interaction. Payload: {domEvent: Event, value: boolean}
-- initValueChange: Triggered when initial value changes. Payload: {value: boolean}
+- value: boolean - Current expand state of the component (Path: variables['current_element_uid-value'])
 
 ***Notes:***
 All 3 slots are required.
