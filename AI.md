@@ -13,8 +13,8 @@ Accordion-style component that hides/reveals content via expand/collapse state w
 - value: boolean - Initial expand/collapse state. Default: false.
 
 ***Slots:***
-- toggleLayout: any[] - Components for toggle area
-- activeToggleLayout: any[] - Components for expanded toggle area (requires all styles from toggleLayout)
+- toggleLayout: any[] - Components for toggle container area when expanded
+- activeToggleLayout: any[] - Components for toggle container area closed expanded (requires all styles from toggleLayout)
 - contentLayout: any[] - Components for content area
 
 ***Exposed Variables:***
@@ -26,3 +26,4 @@ Accordion-style component that hides/reveals content via expand/collapse state w
 
 ***Notes:***
 All 3 slots are required.
+Be careful : toggleLayout is for EXPANDED toggle container and activeToggleLayout is for CLOSED toggle container
