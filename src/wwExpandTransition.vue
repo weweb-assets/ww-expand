@@ -29,10 +29,10 @@ export default {
             element.style.position = '';
             element.style.visibility = '';
             element.style.height = this.minHeight || 0;
-            // Force repaint
-            window.getComputedStyle(element).height;
-            setTimeout(() => {
-                element.style.height = height;
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    element.style.height = height;
+                });
             });
         },
         afterEnter(element) {
